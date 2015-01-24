@@ -25,7 +25,7 @@ somehow gets messed up and cl.exe refuses to run properly. Make sure
 you have X11 forwarding working (see below), then run:
 
 ```sh
-    [dev@wine] /usr/bin/vcinstall.sh
+    [dev@wine] $ /usr/bin/vcinstall.sh
 ```
 
 After that you can run `docker save` so you don't have to keep doing it,
@@ -37,10 +37,10 @@ or better yet make `/home/dev/.wine` a docker volume.
 Try compiling something.
 
 ```sh
-    $ echo '#include <windows.h>' > a.c
-    $ echo 'int main() { printf("hello world"); return 0; }' >> a.c
-    $ cl.exe a.c
-    $ wine a.exe
+    [dev@wine] $ echo '#include <windows.h>' > a.c
+    [dev@wine] $ echo 'int main() { printf("hello world"); return 0; }' >> a.c
+    [dev@wine] $ cl.exe a.c
+    [dev@wine] $ wine a.exe
 ```
 
 ### X11 forwarding
