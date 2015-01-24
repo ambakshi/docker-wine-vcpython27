@@ -29,17 +29,12 @@ USER dev
 ENV HOME /home/dev
 ENV XDG_DATA_HOME $HOME/.local
 
-RUN /usr/bin/wine cmd.exe /c "echo hello world"
-RUN ln -sfn /var/tmp/VCForPython27.msi $HOME/.wine/drive_c
-RUN /usr/bin/wine msiexec /i C:/VCForPython27.msi /quiet /qn /log C:/install.log
-RUN ln -sfn .wine/drive_c/Program\ Files\ \(x86\)/Common\ Files/Microsoft/Visual\ C++\ for\ Python/9.0 $HOME/vcpython27
 RUN mkdir -p $HOME/bin
 RUN echo 'export PATH="$PATH:$HOME/bin"' >> ~/.bashrc
 RUN echo "PS1='[\[\033[32m\]\u@\h\[\033[00m\] \[\033[36m\]\W\[\033[31m\]\[\033[00m\]] \$ '"  >> ~/.bashrc
-RUN echo '#!/bin/sh' > ~/bin/vcwrap.sh
-RUN echo 'export WINEDEBUG=-all' >> ~/bin/vcwrap.sh
-RUN echo 'exec wine "$HOME/vcpython27/VC/bin/$(basename $0)" "$@"' >> $HOME/bin/vcwrap.sh && chmod +x $HOME/bin/vcwrap.sh
-RUN for prog in cl.exe link.exe bscmake.exe nmake.exe lib.exe dumpbin.exe ml.exe pgocvt.exe pgomgr.exe; do ln -sfn vcwrap.sh $HOME/bin/$prog; done
+RUN for prog in cl.exe link.exe bscmake.exe nmake.exe lib.exe dumpbin.exe ml.exe pgocvt.exe pgomgr.exe; do ln -sfn /usr/bin/vcwrap.sh $HOME/bin/$prog; done
 EXPOSE 22
+ADD ./vcwrap.sh /usr/bin/vcwrap.sh
+ADD ./vcinstall.sh /usr/bin/vcinstall.sh
 ADD ./sshd.sh /
 CMD ["/bin/bash","/sshd.sh"]
