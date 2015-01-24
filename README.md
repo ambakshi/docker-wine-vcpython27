@@ -41,6 +41,7 @@ Try compiling something.
     $ echo 'int main() { printf("hello world"); return 0; }' >> a.c
     $ cl.exe a.c
     $ wine a.exe
+```
 
 ### X11 forwarding
 
