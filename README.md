@@ -43,7 +43,7 @@ Try compiling something.
     [dev@wine] $ wine a.exe
 ```
 
-### X11 forwarding
+#### X11 forwarding
 
 The `run` target forwards your Xsession to the container. You shouldn't
 need to do anything extra for this to work. To check if it's working, try:
