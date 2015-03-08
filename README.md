@@ -21,7 +21,7 @@ anything.
 The first time you ssh into the container, you have to run `/usr/bin/vcinstall.sh`
 to set up your ~/.wine directory and run the actual installer. I tried
 to automate this via the Dockerfile or on first login, but wine's setup
-somehow gets messed up and cl.exe refuses to run properly. Make sure
+somehow gets messed up and `cl.exe` refuses to run properly. Make sure
 you have X11 forwarding working (see below), then run:
 
 ```sh
@@ -38,15 +38,18 @@ Try compiling something.
 
 ```sh
     [dev@wine] $ echo '#include <windows.h>' > a.c
-    [dev@wine] $ echo 'int main() { printf("hello world"); return 0; }' >> a.c
-    [dev@wine] $ cl.exe a.c
+    [dev@wine] $ echo 'int main() { printf("hello world\n"); return 0; }' >> a.c
+    [dev@wine] $ cl a.c
     [dev@wine] $ wine a.exe
+    hello world
 ```
 
 #### X11 forwarding
 
 The `run` target forwards your Xsession to the container. You shouldn't
-need to do anything extra for this to work. To check if it's working, try:
+need to do anything extra for this to work if you have DOCKER_HOST set. If
+you don't have it set, you'll need to specify HOST=your-docker-host. To test
+your X11 setup, you can try running xeyes:
 
 ```sh
     $ make HOST=c6 xeyes
@@ -56,7 +59,7 @@ need to do anything extra for this to work. To check if it's working, try:
 #### Details
 
 The container has some scripts in your `~dev/bin` that wrapper the
-various executable like `~dev/bin/cl.exe`. You can call these directly
+various executable like `~dev/bin/cl`. You can call these directly
 from anywhere on your system. The wrapper script `/usr/bin/vcwrap.sh`
 ensures everything's set up right.
 

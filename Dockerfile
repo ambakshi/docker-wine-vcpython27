@@ -32,7 +32,7 @@ ENV XDG_DATA_HOME $HOME/.local
 RUN mkdir -p $HOME/bin
 RUN echo 'export PATH="$PATH:$HOME/bin"' >> ~/.bashrc
 RUN echo "PS1='[\[\033[32m\]\u@\h\[\033[00m\] \[\033[36m\]\W\[\033[31m\]\[\033[00m\]] \$ '"  >> ~/.bashrc
-RUN for prog in cl.exe link.exe bscmake.exe nmake.exe lib.exe dumpbin.exe ml.exe pgocvt.exe pgomgr.exe; do ln -sfn /usr/bin/vcwrap.sh $HOME/bin/$prog; done
+RUN for prog in cl.exe link.exe bscmake.exe nmake.exe lib.exe dumpbin.exe ml.exe pgocvt.exe pgomgr.exe; do ln -sfn /usr/bin/vcwrap.sh $HOME/bin/$(basename $prog .exe); done
 EXPOSE 22
 ADD ./vcwrap.sh /usr/bin/vcwrap.sh
 ADD ./vcinstall.sh /usr/bin/vcinstall.sh
