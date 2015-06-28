@@ -1,0 +1,4 @@
+*.ISO
+ISOs/Standalone/
+ISOs/sdksetup.exe
+vs2013.7z

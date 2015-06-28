@@ -32,3 +32,7 @@ xeyes:
 
 build:
 	docker build -t wine .
+
+vs2013.7z:
+	cd ISOs && cmd.exe /c download_and_extract.bat `cygpath -wa ..\\$@`
+
