@@ -258,8 +258,7 @@ def GetSourceImages(local_dir, pro):
     sys.exit('Non-Express must be used with --local')
   url = GetMainIsoUrl(pro)
   if local_dir:
-    wdk_path = (os.path.join(local_dir, os.path.basename(WDK_ISO_URL))
-                if not pro else None)
+    wdk_path = os.path.join(local_dir, os.path.basename(WDK_ISO_URL)) #if not pro else None)
     return SourceImages(os.path.join(local_dir, os.path.basename(url)),
                         os.path.join(local_dir, 'Standalone'),
                         wdk_path=wdk_path)
