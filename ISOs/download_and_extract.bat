@@ -31,7 +31,6 @@ if not exist Standalone (
     mkdir _Standalone
     start "foo" /wait sdksetup.exe /quiet /features OptionId.WindowsDesktopDebuggers OptionId.WindowsDesktopSoftwareDevelopmentKit /layout _Standalone
     if ERRORLEVEL 1 goto FAIL
-    mkdir Standlone
     rename _Standalone Standalone
 )
 
